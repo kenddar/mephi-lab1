@@ -36,7 +36,7 @@ void menu() {
                 std::cout << "Exit\n";
                 break;
             default:
-                std::cout << "Incorrect choice. Try again.\n";
+                std::cout << "Incorrect choice. Try again\n";
                 break;
         }
     } while (choice != 4);
