@@ -4,27 +4,35 @@
 #include <iostream>
 #include "linkedlist.hpp"
 #include "sequence.h"
-#include "SharedPtr.h"  // Ваш умный указатель SharedPtr
+#include "../pointers/unique_ptr.h"  // Подключаем ваш умный указатель UniquePtr
 
 template<class T>
 class ListSequence : public Sequence<T> {
 private:
-    SharedPtr<LinkedList<T>> data;  // Используем SharedPtr для управления LinkedList
+    UniquePtr<LinkedList<T>> data;  // Используем UniquePtr для управления LinkedList
 
 public:
     // Конструктор с массивом элементов и их количеством
     ListSequence(T* items, int count) {
-        this->data = SharedPtr<LinkedList<T>>(new LinkedList<T>(items, count));
+        this->data = UniquePtr<LinkedList<T>>(new LinkedList<T>(items, count));
     }
 
     // Конструктор по умолчанию
     ListSequence() {
-        this->data = SharedPtr<LinkedList<T>>(new LinkedList<T>());
+        this->data = UniquePtr<LinkedList<T>>(new LinkedList<T>());
     }
 
-    // Конструктор копирования
-    ListSequence(const ListSequence<T>& list) {
-        this->data = list.data;  // SharedPtr автоматически увеличивает счетчик ссылок
+    // Конструктор перемещения
+    ListSequence(ListSequence<T>&& list) noexcept {
+        this->data = std::move(list.data);  // Используем перемещение для передачи владения указателем
+    }
+
+    // Оператор присваивания перемещения
+    ListSequence<T>& operator=(ListSequence<T>&& list) noexcept {
+        if (this != &list) {
+            this->data = std::move(list.data);  // Перемещаем указатель
+        }
+        return *this;
     }
 
     // Получить первый элемент
@@ -44,10 +52,10 @@ public:
 
     // Получить подсписок
     ListSequence<T>* GetSubsequence(int startIndex, int endIndex) {
-        // Получаем подсписок как SharedPtr
-        SharedPtr<LinkedList<T>> sublist = SharedPtr<LinkedList<T>>(this->data->GetSubList(startIndex, endIndex));
+        // Получаем подсписок как UniquePtr
+        UniquePtr<LinkedList<T>> sublist = UniquePtr<LinkedList<T>>(this->data->GetSubList(startIndex, endIndex));
         ListSequence<T>* newSeq = new ListSequence<T>();
-        newSeq->data = sublist;  // SharedPtr обеспечит корректное управление памятью
+        newSeq->data = std::move(sublist);  // Используем перемещение для передачи владения указателем
         return newSeq;
     }
 
@@ -76,15 +84,14 @@ public:
         // Получаем новый LinkedList
         LinkedList<T>* newList = this->data->Concat(list->data.get());  // Используем get() для доступа к сырому указателю
 
-        // Создаем SharedPtr из нового LinkedList
-        SharedPtr<LinkedList<T>> sharedNewList(newList);
+        // Создаем UniquePtr из нового LinkedList
+        UniquePtr<LinkedList<T>> uniqueNewList(newList);
 
         // Создаем новую последовательность
         ListSequence<T>* result = new ListSequence<T>();
-        result->data = sharedNewList;  // SharedPtr гарантирует корректное управление памятью
+        result->data = std::move(uniqueNewList);  // Передаем владение указателем
         return result;
     }
-
 
     // Печать элементов списка
     void Print() {

@@ -15,35 +15,26 @@ private:
     Node<T> *last;
     int size;
 public:
-    LinkedList (T* items, int count){
-        int list_size = 0;
+    LinkedList(T* items, int count) {
+        this->first = nullptr;
+        this->last = nullptr;
         int items_index = 0;
-        Node<T> *tmp1 = NULL;
-        Node<T> *tmp2 = NULL;
-        do{
-            if(this->first == NULL){
-                tmp1 = (Node<T> *)malloc(sizeof(Node<T>));
-                tmp1->item = items[items_index];
-                tmp1->next = this->first;
-                this->first = tmp1;
-                items_index++;
-            }else{
-                if(items_index == count){
-                    tmp1->next = NULL;
-                    this->last = tmp1;
-                    break;
-                }
-                tmp2 = (Node<T> *)malloc(sizeof(Node<T>));
-                tmp2->item = items[items_index];
-                tmp1->next = tmp2;
-                tmp1 = tmp2;
-                items_index++;
+
+        for (int i = 0; i < count; ++i) {
+            Node<T>* newNode = new Node<T>();  // Создаем новый узел с помощью new
+            newNode->item = items[items_index++];
+            newNode->next = nullptr;
+
+            if (this->first == nullptr) {
+                this->first = newNode;  // Устанавливаем первый элемент списка
+            } else {
+                this->last->next = newNode;  // Привязываем новый узел к последнему
             }
-            list_size++;
-        }while(true);
 
-        this->size = list_size;
+            this->last = newNode;  // Перемещаем указатель на последний элемент
+        }
 
+        this->size = count;
     }
     LinkedList (){
         this->first=NULL;
