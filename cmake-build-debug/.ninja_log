@@ -1,6 +1,6 @@
 # ninja log v5
 24	768	7502805419545277	CMakeFiles/lab1sem3.dir/main.cpp.obj	a4aa0aaaa4c9cbad
-10	948	7505411321577645	build.ninja	a7d38647c34e3cad
+10	948	7505412661011521	build.ninja	a7d38647c34e3cad
 769	971	7502805421528160	lab1sem3.exe	53f85507f5cd1852
 5	713	7486507765850858	CMakeFiles/lab1sem3.dir/phone.cpp.obj	9605e23647d51e5c
 21	800	7502777504359437	CMakeFiles/lab1sem3.dir/SharedPtr_tests.cpp.obj	477695577f44158
