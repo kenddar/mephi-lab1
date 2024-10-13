@@ -1,8 +1,8 @@
 #include <iostream>
 #include <chrono>
-#include "UniquePtr.h"
-#include "SmartPtr.h"
-#include "SharedPtr.h"
+#include "../pointers/unique_ptr.h"
+#include "../pointers/smart_ptr.h"
+#include "../pointers/shared_ptr.h"
 
 template<typename Func>
 void measureTime(const std::string& description, Func func){
@@ -15,19 +15,19 @@ void measureTime(const std::string& description, Func func){
 }
 
 void testPointerCreation(){
-    measureTime("UniquePtr Creation", [](){
+    measureTime("unique_ptr Creation", [](){
         for(int i = 0; i < 1000000; ++i){
             UniquePtr<int> ptr(new int(42));
         }
     });
 
-    measureTime("SmartPtr Creation", [](){
+    measureTime("smart_ptr Creation", [](){
         for(int i = 0; i < 1000000; ++i){
             SmartPtr<int> ptr(new int(42));
         }
     });
 
-    measureTime("SharedPtr Creation", [](){
+    measureTime("shared_ptr Creation", [](){
         for(int i = 0; i < 1000000; ++i){
             SharedPtr<int> ptr(new int(42));
         }
@@ -35,14 +35,14 @@ void testPointerCreation(){
 }
 
 void testPointerCopy() {
-    measureTime("SmartPtr Copy", [](){
+    measureTime("smart_ptr Copy", [](){
         SmartPtr<int> ptr1(new int(42));
         for(int i = 0; i < 1000000; ++i){
             SmartPtr<int> ptr2(ptr1);
         }
     });
 
-    measureTime("SharedPtr Copy", [](){
+    measureTime("shared_ptr Copy", [](){
         SharedPtr<int> ptr1(new int(42));
         for(int i = 0; i < 1000000; ++i){
             SharedPtr<int> ptr2(ptr1);
@@ -51,21 +51,21 @@ void testPointerCopy() {
 }
 
 void testPointerMove() {
-    measureTime("UniquePtr Move", []() {
+    measureTime("unique_ptr Move", []() {
         for(int i = 0; i < 1000000; ++i){
             UniquePtr<int> ptr1(new int(42));
             UniquePtr<int> ptr2(std::move(ptr1));
         }
     });
 
-    measureTime("SmartPtr Move", []() {
+    measureTime("smart_ptr Move", []() {
         for(int i = 0; i < 1000000; ++i){
             SmartPtr<int> ptr1(new int(42));
             SmartPtr<int> ptr2(std::move(ptr1));
         }
     });
 
-    measureTime("SharedPtr Move", []() {
+    measureTime("shared_ptr Move", []() {
         for(int i = 0; i < 1000000; ++i){
             SharedPtr<int> ptr1(new int(42));
             SharedPtr<int> ptr2(std::move(ptr1));

@@ -1,7 +1,7 @@
 
 
-#ifndef LAB1SEM3_SMARTPTR_H
-#define LAB1SEM3_SMARTPTR_H
+#ifndef LAB1SEM3_SMART_PTR_H
+#define LAB1SEM3_SMART_PTR_H
 
 
 template<typename T>
@@ -87,4 +87,4 @@ private:
     }
 
 };
-#endif //LAB1SEM3_SMARTPTR_H
+#endif //LAB1SEM3_SMART_PTR_H

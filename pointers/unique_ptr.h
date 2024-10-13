@@ -1,7 +1,7 @@
 
 
-#ifndef LAB1SEM3_UNIQUEPTR_H
-#define LAB1SEM3_UNIQUEPTR_H
+#ifndef LAB1SEM3_UNIQUE_PTR_H
+#define LAB1SEM3_UNIQUE_PTR_H
 
 
 template<typename T>
@@ -58,4 +58,4 @@ public:
     }
 };
 
-#endif //LAB1SEM3_UNIQUEPTR_H
+#endif //LAB1SEM3_UNIQUE_PTR_H

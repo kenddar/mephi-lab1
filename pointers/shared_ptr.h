@@ -1,7 +1,7 @@
 
 
-#ifndef LAB1SEM3_SHAREDPTR_H
-#define LAB1SEM3_SHAREDPTR_H
+#ifndef LAB1SEM3_SHARED_PTR_H
+#define LAB1SEM3_SHARED_PTR_H
 
 
 template<typename T>
@@ -76,4 +76,4 @@ public:
         }
     }
 };
-#endif //LAB1SEM3_SHAREDPTR_H
+#endif //LAB1SEM3_SHARED_PTR_H

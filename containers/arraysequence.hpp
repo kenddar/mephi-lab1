@@ -3,51 +3,45 @@
 
 #include "dynamicarray.hpp"
 #include "sequence.h"
-#include "SharedPtr.h"  // Ваш умный указатель SharedPtr
+#include "../pointers/shared_ptr.h"  // Ваш умный указатель SharedPtr
 #include <iostream>
 
 template<class T>
 class ArraySequence : public Sequence<T> {
 private:
-    SharedPtr<DynamicArray<T>> data;  // Используем SharedPtr для управления DynamicArray
+    SharedPtr<DynamicArray<T>> data;
 
 public:
-    // Конструктор с массивом элементов и их количеством
     ArraySequence(T* items, int count) {
         this->data = SharedPtr<DynamicArray<T>>(new DynamicArray<T>(items, count));
     }
 
-    // Конструктор по умолчанию
     ArraySequence() {
         this->data = SharedPtr<DynamicArray<T>>(new DynamicArray<T>());
     }
 
-    // Конструктор с размером массива
+
     ArraySequence(int size) {
         this->data = SharedPtr<DynamicArray<T>>(new DynamicArray<T>(size));
     }
 
-    // Конструктор копирования
     ArraySequence(const ArraySequence<T>& array) {
-        this->data = array.data;  // SharedPtr автоматически управляет копированием
+        this->data = array.data;
     }
 
-    // Получить первый элемент
     T GetFirst() {
         return this->data->Get(0);
     }
 
-    // Получить последний элемент
     T GetLast() {
         return this->data->Get(this->data->GetSize() - 1);
     }
 
-    // Получить элемент по индексу
     T Get(int index) {
         return this->data->Get(index);
     }
 
-    // Получить подмассив
+
     ArraySequence<T>* GetSubsequence(int startIndex, int endIndex) {
         if (this->data->GetSize() <= 0 || startIndex < 0 || startIndex >= this->data->GetSize() ||
             endIndex < 0 || endIndex >= this->data->GetSize() || endIndex <= startIndex) {
@@ -63,18 +57,16 @@ public:
         }
     }
 
-    // Получить длину массива
+
     int GetLength() {
         return this->data->GetSize();
     }
 
-    // Добавить элемент в конец массива
     void Append(T item) {
         this->data->Resize(this->data->GetSize() + 1);
         this->data->Set(this->data->GetSize() - 1, item);
     }
 
-    // Добавить элемент в начало массива
     void Prepend(T item) {
         this->data->Resize(this->data->GetSize() + 1);
         for (int i = this->data->GetSize() - 1; i > 0; --i) {
