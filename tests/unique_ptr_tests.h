@@ -1,0 +1,4 @@
+#ifndef LAB1SEM3_UNIQUE_PTR_TESTS_H
+#define LAB1SEM3_UNIQUE_PTR_TESTS_H
+void CallingUniquePtrTests();
+#endif //LAB1SEM3_UNIQUE_PTR_TESTS_H

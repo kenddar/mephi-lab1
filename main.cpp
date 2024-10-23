@@ -6,7 +6,3 @@ int main() {
 
 
 
-//старый dynarr; linkedlist;
-//smartptr отдельно тесты
-// unique and shared через array(lis)sequence
-//+тесты

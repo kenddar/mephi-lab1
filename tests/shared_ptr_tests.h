@@ -1,0 +1,4 @@
+#ifndef LAB1SEM3_SHARED_PTR_TESTS_H
+#define LAB1SEM3_SHARED_PTR_TESTS_H
+void CallingSharedPtrTests();
+#endif //LAB1SEM3_SHARED_PTR_TESTS_H

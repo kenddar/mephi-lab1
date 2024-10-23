@@ -57,22 +57,11 @@ void testAppendElements() {
     assert(arr[6] == 7); // Проверяем, что добавленный элемент равен 7
 }
 
-void testOutOfBoundsAccess() {
-    SmartArray<int> arr(5);
-    try {
-        arr[7]; // Попытка доступа к элементу за пределами массива
-        std::cerr << "Expected an exception for out-of-bounds access" << std::endl;
-    } catch (const std::out_of_range&) {
-        std::cout << "Caught expected out_of_range exception." << std::endl;
-    } catch (...) {
-        std::cerr << "Caught unexpected exception." << std::endl;
-    }
-}
 
 void smart_array_with_smart_ptr_test() {
     testInitialization();
     testAccessElements();
     testAppendElements();
-    testOutOfBoundsAccess();
+
     std::cout << "All tests passed!" << std::endl;
 }

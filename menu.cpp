@@ -3,7 +3,9 @@
 #include "tests/array_sequence_with_shared_ptr_tests.h"
 #include "tests/smart_array_with_smart_ptr_tests.h"
 #include "tests/list_sequence_with_unique_ptr_tests.h"
-
+#include "tests/shared_ptr_tests.h"
+#include "tests/smart_ptr_tests.h"
+#include "tests/unique_ptr_tests.h"
 
 void print_menu(){
     std::cout << "\nMenu:\n";
@@ -26,12 +28,15 @@ void menu() {
         switch (choice) {
             case 1:
                 array_sequence_with_shared_ptr_test();
+                CallingSharedPtrTests();
                 break;
             case 2:
                 list_sequence_with_unique_ptr_tests();
+                CallingUniquePtrTests();
                 break;
             case 3:
                 smart_array_with_smart_ptr_test();
+                CallingSmartPtrTests();
             case 4:
                 std::cout << "Exit\n";
                 break;

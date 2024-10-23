@@ -73,6 +73,24 @@ build CMakeFiles/lab1sem3.dir/tests/smart_array_with_smart_ptr_tests.cpp.obj: CX
   OBJECT_DIR = CMakeFiles\lab1sem3.dir
   OBJECT_FILE_DIR = CMakeFiles\lab1sem3.dir\tests
 
+build CMakeFiles/lab1sem3.dir/tests/unique_ptr_tests.cpp.obj: CXX_COMPILER__lab1sem3_unscanned_Debug D$:/mephilabs/lab1sem3/tests/unique_ptr_tests.cpp || cmake_object_order_depends_target_lab1sem3
+  DEP_FILE = CMakeFiles\lab1sem3.dir\tests\unique_ptr_tests.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab1sem3.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab1sem3.dir\tests
+
+build CMakeFiles/lab1sem3.dir/tests/smart_ptr_tests.cpp.obj: CXX_COMPILER__lab1sem3_unscanned_Debug D$:/mephilabs/lab1sem3/tests/smart_ptr_tests.cpp || cmake_object_order_depends_target_lab1sem3
+  DEP_FILE = CMakeFiles\lab1sem3.dir\tests\smart_ptr_tests.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab1sem3.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab1sem3.dir\tests
+
+build CMakeFiles/lab1sem3.dir/tests/shared_ptr_tests.cpp.obj: CXX_COMPILER__lab1sem3_unscanned_Debug D$:/mephilabs/lab1sem3/tests/shared_ptr_tests.cpp || cmake_object_order_depends_target_lab1sem3
+  DEP_FILE = CMakeFiles\lab1sem3.dir\tests\shared_ptr_tests.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab1sem3.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab1sem3.dir\tests
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab1sem3
@@ -81,7 +99,7 @@ build CMakeFiles/lab1sem3.dir/tests/smart_array_with_smart_ptr_tests.cpp.obj: CX
 #############################################
 # Link the executable lab1sem3.exe
 
-build lab1sem3.exe: CXX_EXECUTABLE_LINKER__lab1sem3_Debug CMakeFiles/lab1sem3.dir/main.cpp.obj CMakeFiles/lab1sem3.dir/tests/array_sequence_with_shared_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/list_sequence_with_unique_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/smart_array_with_smart_ptr_tests.cpp.obj
+build lab1sem3.exe: CXX_EXECUTABLE_LINKER__lab1sem3_Debug CMakeFiles/lab1sem3.dir/main.cpp.obj CMakeFiles/lab1sem3.dir/tests/array_sequence_with_shared_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/list_sequence_with_unique_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/smart_array_with_smart_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/unique_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/smart_ptr_tests.cpp.obj CMakeFiles/lab1sem3.dir/tests/shared_ptr_tests.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab1sem3.dir

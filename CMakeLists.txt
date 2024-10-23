@@ -14,4 +14,11 @@ add_executable(lab1sem3 main.cpp
         tests/smart_array_with_smart_ptr_tests.cpp
         tests/smart_array_with_smart_ptr_tests.h
         containers/smart_array.h
+        containers/smart_array.h
+        tests/unique_ptr_tests.cpp
+        tests/unique_ptr_tests.h
+        tests/smart_ptr_tests.cpp
+        tests/smart_ptr_tests.h
+        tests/shared_ptr_tests.cpp
+        tests/shared_ptr_tests.h
 )

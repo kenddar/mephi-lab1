@@ -39,11 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "lab1sem3::@6890427a1f51a3e7e1df",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-3ccad0d78425b7363f91.json
-					"jsonFile" : "target-lab1sem3-Debug-b59d533b3a08cffcf98c.json",
-========
-					"jsonFile" : "target-lab1sem3-Debug-213c693dd5bfb0c5be4d.json",
->>>>>>>> my-temporary-branch:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-554f9724eeb4a74e2f36.json
+					"jsonFile" : "target-lab1sem3-Debug-0b6dc1ea90a8077aa03e.json",
 					"name" : "lab1sem3",
 					"projectIndex" : 0
 				}
