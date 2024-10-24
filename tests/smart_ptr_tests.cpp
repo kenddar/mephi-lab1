@@ -5,18 +5,18 @@
 void testDefaultConstructorSmartPtr() {
     SmartPtr<int> ptr;
     if (ptr.get() == nullptr && ptr.num_count() == 0) {
-        std::cout << "testDefaultConstructor PASSED\n";
+        std::cout << "TestDefaultConstructor passed!\n";
     } else {
-        std::cout << "testDefaultConstructor FAILED\n";
+        std::cout << "TestDefaultConstructor failed!\n";
     }
 }
 
 void testConstructorWithParameterSmartPtr() {
     SmartPtr<int> ptr(new int(42));
     if (*ptr == 42 && ptr.num_count() == 1) {
-        std::cout << "testConstructorWithParameter PASSED\n";
+        std::cout << "TestConstructorWithParameter passed!\n";
     } else {
-        std::cout << "testConstructorWithParameter FAILED\n";
+        std::cout << "TestConstructorWithParameter failed!\n";
     }
 }
 
@@ -25,9 +25,9 @@ void testCopyConstructorSmartPtr() {
     SmartPtr<int> ptr2(ptr1);
 
     if (*ptr1 == 42 && *ptr2 == 42 && ptr1.num_count() == 2 && ptr2.num_count() == 2) {
-        std::cout << "testCopyConstructor PASSED\n";
+        std::cout << "TestCopyConstructor passed!\n";
     } else {
-        std::cout << "testCopyConstructor FAILED\n";
+        std::cout << "TestCopyConstructor failed!\n";
     }
 }
 
@@ -37,9 +37,9 @@ void testCopyAssignmentSmartPtr() {
     ptr2 = ptr1;
 
     if (*ptr1 == 42 && *ptr2 == 42 && ptr1.num_count() == 2 && ptr2.num_count() == 2) {
-        std::cout << "testCopyAssignment PASSED\n";
+        std::cout << "TestCopyAssignment passed!\n";
     } else {
-        std::cout << "testCopyAssignment FAILED\n";
+        std::cout << "TestCopyAssignment failed!\n";
     }
 }
 
@@ -48,9 +48,9 @@ void testMoveConstructorSmartPtr() {
     SmartPtr<int> ptr2(std::move(ptr1));
 
     if (ptr1.get() == nullptr && *ptr2 == 42 && ptr2.num_count() == 1) {
-        std::cout << "testMoveConstructor PASSED\n";
+        std::cout << "TestMoveConstructor passed!\n";
     } else {
-        std::cout << "testMoveConstructor FAILED\n";
+        std::cout << "TestMoveConstructor failed!\n";
     }
 }
 
@@ -60,9 +60,9 @@ void testMoveAssignmentSmartPtr() {
     ptr2 = std::move(ptr1);
 
     if (ptr1.get() == nullptr && *ptr2 == 42 && ptr2.num_count() == 1) {
-        std::cout << "testMoveAssignment PASSED\n";
+        std::cout << "TestMoveAssignment passed!\n";
     } else {
-        std::cout << "testMoveAssignment FAILED\n";
+        std::cout << "TestMoveAssignment failed!\n";
     }
 }
 
@@ -71,18 +71,18 @@ void testResetSmartPtr() {
     ptr.reset(new int(100));
 
     if (*ptr == 100 && ptr.num_count() == 1) {
-        std::cout << "testReset PASSED\n";
+        std::cout << "TestReset passed!\n";
     } else {
-        std::cout << "testReset FAILED\n";
+        std::cout << "TestReset failed!\n";
     }
 }
 
 void testDereferenceOperatorSmartPtr() {
     SmartPtr<int> ptr(new int(42));
     if (*ptr == 42) {
-        std::cout << "testDereferenceOperator PASSED\n";
+        std::cout << "TestDereferenceOperator passed!\n";
     } else {
-        std::cout << "testDereferenceOperator FAILED\n";
+        std::cout << "TestDereferenceOperator failed!\n";
     }
 }
 
@@ -94,9 +94,9 @@ void testArrowOperatorSmartPtr() {
 
     SmartPtr<TestClass> ptr(new TestClass(42));
     if (ptr->value == 42) {
-        std::cout << "testArrowOperator PASSED\n";
+        std::cout << "TestArrowOperator passed!\n";
     } else {
-        std::cout << "testArrowOperator FAILED\n";
+        std::cout << "TestArrowOperator failed!\n";
     }
 }
 

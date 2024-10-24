@@ -3,7 +3,7 @@
 
 #include "dynamicarray.hpp"
 #include "sequence.h"
-#include "../pointers/shared_ptr.h"  // Ваш умный указатель SharedPtr
+#include "../pointers/shared_ptr.h"
 #include <iostream>
 
 template<class T>
@@ -76,7 +76,7 @@ public:
         this->data->Set(0, item);
     }
 
-    // Вставить элемент по индексу
+
     void InsertAt(T item, int index) {
         this->data->Resize(this->data->GetSize() + 1);
         for (int i = this->data->GetSize() - 1; i > index; --i) {
@@ -86,7 +86,7 @@ public:
         this->data->Set(index, item);
     }
 
-    // Конкатенация двух массивов
+
     Sequence<T>* Concat(ArraySequence<T>* list) {
         auto newItem = new ArraySequence<T>(this->data->GetSize() + list->data->GetSize());
         int index = 0;
@@ -101,7 +101,7 @@ public:
         return newItem;
     }
 
-    // Печать массива
+
     void Print() {
         for (int i = 0; i < this->data->GetSize(); ++i) {
             std::cout << this->data->Get(i) << " ";

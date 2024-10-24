@@ -1,4 +1,4 @@
-#include "tests/time_tests.cpp"
+# include <iostream>
 #include "menu.h"
 #include "tests/array_sequence_with_shared_ptr_tests.h"
 #include "tests/smart_array_with_smart_ptr_tests.h"

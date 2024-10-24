@@ -1,23 +1,22 @@
 #include "shared_ptr_tests.h"
-#include "../tests/shared_ptr_tests.h"
 #include <iostream>
 #include "../pointers/shared_ptr.h"
 
 void testDefaultConstructorSharedPtr() {
     SharedPtr<int> ptr;
     if (ptr.get() == nullptr && ptr.num_count() == 0) {
-        std::cout << "testDefaultConstructor PASSED\n";
+        std::cout << "TestDefaultConstructor passed!\n";
     } else {
-        std::cout << "testDefaultConstructor FAILED\n";
+        std::cout << "TestDefaultConstructor failed!\n";
     }
 }
 
 void testConstructorWithParameterSharedPtr() {
     SharedPtr<int> ptr(new int(42));
     if (*ptr == 42 && ptr.num_count() == 1) {
-        std::cout << "testConstructorWithParameter PASSED\n";
+        std::cout << "TestConstructorWithParameter passed!\n";
     } else {
-        std::cout << "testConstructorWithParameter FAILED\n";
+        std::cout << "TestConstructorWithParameter failed!\n";
     }
 }
 
@@ -26,9 +25,9 @@ void testCopyConstructorSharedPtr() {
     SharedPtr<int> ptr2(ptr1);
 
     if (*ptr1 == 42 && *ptr2 == 42 && ptr1.num_count() == 2 && ptr2.num_count() == 2) {
-        std::cout << "testCopyConstructor PASSED\n";
+        std::cout << "TestCopyConstructor passed!\n";
     } else {
-        std::cout << "testCopyConstructor FAILED\n";
+        std::cout << "TestCopyConstructor failed!\n";
     }
 }
 
@@ -38,18 +37,18 @@ void testCopyAssignmentSharedPtr() {
     ptr2 = ptr1;
 
     if (*ptr1 == 42 && *ptr2 == 42 && ptr1.num_count() == 2 && ptr2.num_count() == 2) {
-        std::cout << "testCopyAssignment PASSED\n";
+        std::cout << "TestCopyAssignment passed!\n";
     } else {
-        std::cout << "testCopyAssignment FAILED\n";
+        std::cout << "TestCopyAssignment failed!\n";
     }
 }
 
 void testDereferenceOperatorSharedPtr() {
     SharedPtr<int> ptr(new int(42));
     if (*ptr == 42) {
-        std::cout << "testDereferenceOperator PASSED\n";
+        std::cout << "TestDereferenceOperator passed!\n";
     } else {
-        std::cout << "testDereferenceOperator FAILED\n";
+        std::cout << "TestDereferenceOperator failed!\n";
     }
 }
 
@@ -61,9 +60,9 @@ void testArrowOperatorSharedPtr() {
 
     SharedPtr<TestClass> ptr(new TestClass(42));
     if (ptr->value == 42) {
-        std::cout << "testArrowOperator PASSED\n";
+        std::cout << "TestArrowOperator passed!\n";
     } else {
-        std::cout << "testArrowOperator FAILED\n";
+        std::cout << "TestArrowOperator failed!\n";
     }
 }
 
@@ -72,9 +71,9 @@ void testResetSharedPtr() {
     ptr.reset(new int(100));
 
     if (*ptr == 100 && ptr.num_count() == 1) {
-        std::cout << "testReset PASSED\n";
+        std::cout << "TestReset passed!\n";
     } else {
-        std::cout << "testReset FAILED\n";
+        std::cout << "TestReset failed!\n";
     }
 }
 
@@ -84,16 +83,16 @@ void testReferenceCountingSharedPtr() {
     SharedPtr<int> ptr3(ptr2);
 
     if (ptr1.num_count() == 3 && ptr2.num_count() == 3 && ptr3.num_count() == 3) {
-        std::cout << "testReferenceCounting PASSED\n";
+        std::cout << "TestReferenceCounting passed!\n";
     } else {
-        std::cout << "testReferenceCounting FAILED\n";
+        std::cout << "TestReferenceCounting failed!\n";
     }
 
     ptr3.reset();
     if (ptr1.num_count() == 2 && ptr2.num_count() == 2 && ptr3.num_count() == 0) {
-        std::cout << "testReferenceCounting after reset PASSED\n";
+        std::cout << "TestReferenceCounting after reset passed!\n";
     } else {
-        std::cout << "testReferenceCounting after reset FAILED\n";
+        std::cout << "TestReferenceCounting after reset failed!\n";
     }
 }
 

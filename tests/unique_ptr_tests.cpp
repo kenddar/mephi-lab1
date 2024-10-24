@@ -5,18 +5,18 @@
 void testDefaultConstructorUniquePtr() {
     UniquePtr<int> ptr;
     if (ptr.get() == nullptr) {
-        std::cout << "testDefaultConstructor PASSED\n";
+        std::cout << "TestDefaultConstructor passed!\n";
     } else {
-        std::cout << "testDefaultConstructor FAILED\n";
+        std::cout << "TestDefaultConstructor failed!\n";
     }
 }
 
 void testExplicitConstructorUniquePtr() {
     UniquePtr<int> ptr(new int(42));
     if (*ptr == 42) {
-        std::cout << "testExplicitConstructor PASSED\n";
+        std::cout << "TestExplicitConstructor passed!\n";
     } else {
-        std::cout << "testExplicitConstructor FAILED\n";
+        std::cout << "TestExplicitConstructor failed!\n";
     }
 }
 
@@ -25,9 +25,9 @@ void testMoveConstructorUniquePtr() {
     UniquePtr<int> ptr2(std::move(ptr1));
 
     if (ptr1.get() == nullptr && *ptr2 == 42) {
-        std::cout << "testMoveConstructor PASSED\n";
+        std::cout << "TestMoveConstructor passed!\n";
     } else {
-        std::cout << "testMoveConstructor FAILED\n";
+        std::cout << "TestMoveConstructor failed!\n";
     }
 }
 
@@ -38,18 +38,18 @@ void testMoveAssignmentUniquePtr() {
     ptr2 = std::move(ptr1);
 
     if (ptr1.get() == nullptr && *ptr2 == 100) {
-        std::cout << "testMoveAssignment PASSED\n";
+        std::cout << "TestMoveAssignment passed!\n";
     } else {
-        std::cout << "testMoveAssignment FAILED\n";
+        std::cout << "TestMoveAssignment failed!\n";
     }
 }
 
 void testDereferenceOperatorUniquePtr() {
     UniquePtr<int> ptr(new int(55));
     if (*ptr == 55) {
-        std::cout << "testDereferenceOperator PASSED\n";
+        std::cout << "TestDereferenceOperator passed!\n";
     } else {
-        std::cout << "testDereferenceOperator FAILED\n";
+        std::cout << "TestDereferenceOperator failed!\n";
     }
 }
 
@@ -61,9 +61,9 @@ void testArrowOperatorUniquePtr() {
 
     UniquePtr<TestClass> ptr(new TestClass(42));
     if (ptr->value == 42) {
-        std::cout << "testArrowOperator PASSED\n";
+        std::cout << "TestArrowOperator passed!\n";
     } else {
-        std::cout << "testArrowOperator FAILED\n";
+        std::cout << "TestArrowOperator failed!\n";
     }
 }
 
@@ -72,12 +72,12 @@ void testReleaseMethodUniquePtr() {
     int* rawPtr = ptr.release();
 
     if (ptr.get() == nullptr && *rawPtr == 88) {
-        std::cout << "testReleaseMethod PASSED\n";
+        std::cout << "TestReleaseMethod passed!\n";
     } else {
-        std::cout << "testReleaseMethod FAILED\n";
+        std::cout << "TestReleaseMethod failed!\n";
     }
 
-    delete rawPtr; // Не забываем вручную удалить rawPtr
+    delete rawPtr;
 }
 
 void testResetMethodUniquePtr() {
@@ -85,9 +85,9 @@ void testResetMethodUniquePtr() {
     ptr.reset(new int(99));
 
     if (*ptr == 99) {
-        std::cout << "testResetMethod PASSED\n";
+        std::cout << "TestResetMethod passed!\n";
     } else {
-        std::cout << "testResetMethod FAILED\n";
+        std::cout << "TestResetMethod failed!\n";
     }
 }
 

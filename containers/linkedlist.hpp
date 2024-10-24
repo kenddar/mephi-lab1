@@ -21,17 +21,17 @@ public:
         int items_index = 0;
 
         for (int i = 0; i < count; ++i) {
-            Node<T>* newNode = new Node<T>();  // Создаем новый узел с помощью new
+            Node<T>* newNode = new Node<T>();
             newNode->item = items[items_index++];
             newNode->next = nullptr;
 
             if (this->first == nullptr) {
-                this->first = newNode;  // Устанавливаем первый элемент списка
+                this->first = newNode;
             } else {
-                this->last->next = newNode;  // Привязываем новый узел к последнему
+                this->last->next = newNode;
             }
 
-            this->last = newNode;  // Перемещаем указатель на последний элемент
+            this->last = newNode;
         }
 
         this->size = count;
