@@ -1,26 +1,23 @@
-
-
 #ifndef LAB1SEM3_SMART_PTR_H
 #define LAB1SEM3_SMART_PTR_H
 
-
 template<typename T>
-class SmartPtr{
+class SmartPtr {
 private:
     T* ptr;
     int* ref_count;
 
 public:
-    SmartPtr() : ptr(nullptr), ref_count(new int(0)){}
+    SmartPtr() : ptr(nullptr), ref_count(new int(0)) {}
 
-    explicit SmartPtr(T* p) : ptr(p), ref_count(new int(1)){}
+    explicit SmartPtr(T* p) : ptr(p), ref_count(new int(1)) {}
 
-    SmartPtr(const SmartPtr& other) : ptr(other.ptr), ref_count(other.ref_count){
+    SmartPtr(const SmartPtr& other) : ptr(other.ptr), ref_count(other.ref_count) {
         ++(*ref_count);
     }
 
-    SmartPtr& operator=(const SmartPtr& other){
-        if(this != &other){
+    SmartPtr& operator=(const SmartPtr& other) {
+        if (this != &other) {
             release();
             ptr = other.ptr;
             ref_count = other.ref_count;
@@ -29,13 +26,13 @@ public:
         return *this;
     }
 
-    SmartPtr(SmartPtr&& other) noexcept : ptr(other.ptr), ref_count(other.ref_count){
+    SmartPtr(SmartPtr&& other) noexcept : ptr(other.ptr), ref_count(other.ref_count) {
         other.ptr = nullptr;
         other.ref_count = nullptr;
     }
 
-    SmartPtr& operator=(SmartPtr&& other) noexcept{
-        if(this != &other){
+    SmartPtr& operator=(SmartPtr&& other) noexcept {
+        if (this != &other) {
             release();
             ptr = other.ptr;
             ref_count = other.ref_count;
@@ -45,46 +42,54 @@ public:
         return *this;
     }
 
-    ~SmartPtr(){
+    ~SmartPtr() {
         release();
     }
 
-    T& operator*() const{
+    T& operator*() const {
         return *ptr;
     }
 
-    T* operator->() const{
+    T* operator->() const {
         return ptr;
     }
 
-    T* get() const{
-        return ptr;
+    T& operator[](size_t index) {
+        return ptr[index];
     }
 
-    void reset(T* p = nullptr){
+    const T& operator[](size_t index) const {
+        return ptr[index];
+    }
+
+    void reset(T* p = nullptr) {
         release();
-        if(p){
+        if (p) {
             ptr = p;
             ref_count = new int(1);
         }
     }
 
-    int num_count() const{
+    int num_count() const {
         return *ref_count;
     }
 
 private:
-    void release(){
-        if(ref_count){
+    T* get() const {
+        return ptr;
+    }
+
+    void release() {
+        if (ref_count) {
             --(*ref_count);
-            if(*ref_count == 0){
-               delete ptr;
-               delete ref_count;
+            if (*ref_count == 0) {
+                delete[] ptr;
+                delete ref_count;
             }
         }
         ptr = nullptr;
         ref_count = nullptr;
     }
-
 };
-#endif //LAB1SEM3_SMART_PTR_H
+
+#endif // LAB1SEM3_SMART_PTR_H

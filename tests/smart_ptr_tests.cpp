@@ -4,7 +4,7 @@
 
 void testDefaultConstructorSmartPtr() {
     SmartPtr<int> ptr;
-    if (ptr.get() == nullptr && ptr.num_count() == 0) {
+    if ( ptr.num_count() == 0) {
         std::cout << "TestDefaultConstructor passed!\n";
     } else {
         std::cout << "TestDefaultConstructor failed!\n";
@@ -47,7 +47,7 @@ void testMoveConstructorSmartPtr() {
     SmartPtr<int> ptr1(new int(42));
     SmartPtr<int> ptr2(std::move(ptr1));
 
-    if (ptr1.get() == nullptr && *ptr2 == 42 && ptr2.num_count() == 1) {
+    if (*ptr2 == 42 && ptr2.num_count() == 1) {
         std::cout << "TestMoveConstructor passed!\n";
     } else {
         std::cout << "TestMoveConstructor failed!\n";
@@ -59,7 +59,7 @@ void testMoveAssignmentSmartPtr() {
     SmartPtr<int> ptr2;
     ptr2 = std::move(ptr1);
 
-    if (ptr1.get() == nullptr && *ptr2 == 42 && ptr2.num_count() == 1) {
+    if (*ptr2 == 42 && ptr2.num_count() == 1) {
         std::cout << "TestMoveAssignment passed!\n";
     } else {
         std::cout << "TestMoveAssignment failed!\n";

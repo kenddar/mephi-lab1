@@ -79,28 +79,6 @@ void TestListGetOutOfRange() {
     std::cout << "TestListGetOutOfRange passed!" << std::endl;
 }
 
-void TestListConcat() {
-    int items1[] = {1, 2, 3};
-    int items2[] = {4, 5, 6};
-
-    ListSequence<int> seq1(items1, 3);
-    ListSequence<int> seq2(items2, 3);
-
-    ListSequence<int>* resultSeq = dynamic_cast<ListSequence<int>*>(seq1.Concat(&seq2));
-
-    assert(resultSeq->GetLength() == 6);
-
-    assert(resultSeq->Get(0) == 1);
-    assert(resultSeq->Get(1) == 2);
-    assert(resultSeq->Get(2) == 3);
-    assert(resultSeq->Get(3) == 4);
-    assert(resultSeq->Get(4) == 5);
-    assert(resultSeq->Get(5) == 6);
-
-    std::cout << "TestListConcat passed!" << std::endl;
-
-    delete resultSeq;
-}
 
 void list_sequence_with_unique_ptr_tests() {
     TestListInsertAt();
@@ -111,5 +89,4 @@ void list_sequence_with_unique_ptr_tests() {
     TestListGetLast();
     TestListGetOutOfRange();
     TestListInsertAtOutOfRange();
-    TestListConcat();
 }

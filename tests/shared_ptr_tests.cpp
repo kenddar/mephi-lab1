@@ -4,7 +4,7 @@
 
 void testDefaultConstructorSharedPtr() {
     SharedPtr<int> ptr;
-    if (ptr.get() == nullptr && ptr.num_count() == 0) {
+    if ( ptr.num_count() == 0) {
         std::cout << "TestDefaultConstructor passed!\n";
     } else {
         std::cout << "TestDefaultConstructor failed!\n";

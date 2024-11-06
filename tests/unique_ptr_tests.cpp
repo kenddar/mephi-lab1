@@ -2,14 +2,7 @@
 #include <iostream>
 #include "../pointers/unique_ptr.h"
 
-void testDefaultConstructorUniquePtr() {
-    UniquePtr<int> ptr;
-    if (ptr.get() == nullptr) {
-        std::cout << "TestDefaultConstructor passed!\n";
-    } else {
-        std::cout << "TestDefaultConstructor failed!\n";
-    }
-}
+
 
 void testExplicitConstructorUniquePtr() {
     UniquePtr<int> ptr(new int(42));
@@ -24,7 +17,7 @@ void testMoveConstructorUniquePtr() {
     UniquePtr<int> ptr1(new int(42));
     UniquePtr<int> ptr2(std::move(ptr1));
 
-    if (ptr1.get() == nullptr && *ptr2 == 42) {
+    if (*ptr2 == 42) {
         std::cout << "TestMoveConstructor passed!\n";
     } else {
         std::cout << "TestMoveConstructor failed!\n";
@@ -37,7 +30,7 @@ void testMoveAssignmentUniquePtr() {
 
     ptr2 = std::move(ptr1);
 
-    if (ptr1.get() == nullptr && *ptr2 == 100) {
+    if (*ptr2 == 100) {
         std::cout << "TestMoveAssignment passed!\n";
     } else {
         std::cout << "TestMoveAssignment failed!\n";
@@ -67,18 +60,7 @@ void testArrowOperatorUniquePtr() {
     }
 }
 
-void testReleaseMethodUniquePtr() {
-    UniquePtr<int> ptr(new int(88));
-    int* rawPtr = ptr.release();
 
-    if (ptr.get() == nullptr && *rawPtr == 88) {
-        std::cout << "TestReleaseMethod passed!\n";
-    } else {
-        std::cout << "TestReleaseMethod failed!\n";
-    }
-
-    delete rawPtr;
-}
 
 void testResetMethodUniquePtr() {
     UniquePtr<int> ptr(new int(77));
@@ -93,11 +75,9 @@ void testResetMethodUniquePtr() {
 
 void CallingUniquePtrTests(){
     testArrowOperatorUniquePtr();
-    testDefaultConstructorUniquePtr();
     testDereferenceOperatorUniquePtr();
     testExplicitConstructorUniquePtr();
     testMoveAssignmentUniquePtr();
     testMoveConstructorUniquePtr();
-    testReleaseMethodUniquePtr();
     testResetMethodUniquePtr();
 }

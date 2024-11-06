@@ -2,12 +2,11 @@
 #define arraysequence_hpp
 
 #include "dynamicarray.hpp"
-#include "sequence.h"
 #include "../pointers/shared_ptr.h"
 #include <iostream>
 
 template<class T>
-class ArraySequence : public Sequence<T> {
+class ArraySequence {
 private:
     SharedPtr<DynamicArray<T>> data;
 
@@ -87,7 +86,7 @@ public:
     }
 
 
-    Sequence<T>* Concat(ArraySequence<T>* list) {
+    ArraySequence<T>* Concat(ArraySequence<T>* list) {
         auto newItem = new ArraySequence<T>(this->data->GetSize() + list->data->GetSize());
         int index = 0;
 
@@ -102,12 +101,7 @@ public:
     }
 
 
-    void Print() {
-        for (int i = 0; i < this->data->GetSize(); ++i) {
-            std::cout << this->data->Get(i) << " ";
-        }
-        std::cout << std::endl;
-    }
+
 };
 
 #endif /* arraysequence_hpp */

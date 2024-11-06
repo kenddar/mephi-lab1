@@ -3,11 +3,10 @@
 
 #include <iostream>
 #include "linkedlist.hpp"
-#include "sequence.h"
 #include "../pointers/unique_ptr.h"
 
 template<class T>
-class ListSequence : public Sequence<T> {
+class ListSequence{
 private:
     UniquePtr<LinkedList<T>> data;
 
@@ -67,23 +66,9 @@ public:
         this->data->InsertAt(item, index);
     }
 
-    Sequence<T>* Concat(ListSequence<T>* list) {
-        LinkedList<T>* newList = this->data->Concat(list->data.get());
 
 
-        UniquePtr<LinkedList<T>> uniqueNewList(newList);
 
-        ListSequence<T>* result = new ListSequence<T>();
-        result->data = std::move(uniqueNewList);
-        return result;
-    }
-
-    void Print() {
-        for (int i = 0; i < this->data->GetLength(); ++i) {
-            std::cout << this->data->Get(i) << " ";
-        }
-        std::cout << std::endl;
-    }
 };
 
 #endif /* listsequence_hpp */

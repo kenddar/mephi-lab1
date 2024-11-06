@@ -25,12 +25,15 @@ public:
         this->count=size;
         this->array=  new T[size];
     }
-    DynamicArray(DynamicArray<T> & dynamicArray){
+    DynamicArray(const DynamicArray<T>& dynamicArray) {
         this->count = dynamicArray.count;
-        for(int i = 0; i < this->count; i++){
+        this->array = new T[this->count];
+
+        for (int i = 0; i < this->count; i++) {
             this->array[i] = dynamicArray.array[i];
         }
     }
+
     T Get(int index){
         if (index < 0 || index >= count)
             throw std::out_of_range("index");
@@ -45,18 +48,32 @@ public:
         }
         this->array[index]=value;
     }
-    void Resize(int newSize){
-        if(newSize < 0 )
+
+    void Resize(int newSize) {
+        if (newSize < 0) {
             throw std::out_of_range("newSize");
-        if(newSize == 0){
-            this->count=0;
-            this->array= NULL;
         }
-        this->array = (T *)realloc(this->array, newSize * sizeof(T));
-        this->count = newSize;
+
+        if (newSize == 0) {
+            delete[] this->array;
+            this->array = nullptr;
+            this->count = 0;
+        } else {
+            T* newArray = new T[newSize];
+
+
+            for (int i = 0; i < (newSize < this->count ? newSize : this->count); ++i) {
+                newArray[i] = this->array[i];
+            }
+
+            delete[] this->array;
+
+            this->array = newArray;
+            this->count = newSize;
+        }
     }
-    
-    
+
+
 };
 
 #endif //LAB1SEM3_DYNAMICARRAY_HPP

@@ -22,6 +22,10 @@ private:
         }
     }
 
+    T* get() const{
+        return ptr;
+    }
+
 public:
     SharedPtr() : ptr(nullptr), ref_count(nullptr){}
 
@@ -50,7 +54,11 @@ public:
     }
 
     int num_count() const {
-        return ref_count ? *ref_count : 0;
+        if(ref_count){
+            return *ref_count;
+        }else{
+            return 0;
+        }
     }
 
     T& operator*() const {
@@ -61,9 +69,7 @@ public:
         return ptr;
     }
 
-    T* get() const{
-        return ptr;
-    }
+
 
     void reset(T* p = nullptr){
         release();

@@ -9,6 +9,17 @@ class UniquePtr{
 private:
     T* ptr;
 
+    T* release(){
+        T* temp = ptr;
+        ptr = nullptr;
+        return temp;
+    }
+
+    T* get() const{
+        return ptr;
+    }
+
+
 public:
     UniquePtr() : ptr(nullptr) {}
 
@@ -42,15 +53,7 @@ public:
         return ptr;
     }
 
-    T* get() const{
-        return ptr;
-    }
 
-    T* release(){
-        T* temp = ptr;
-        ptr = nullptr;
-        return temp;
-    }
 
     void reset(T* newPtr = nullptr){
         delete ptr;

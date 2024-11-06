@@ -1,56 +1,63 @@
-#include "smart_array_with_smart_ptr_tests.h"
 #include <iostream>
 #include "../containers/smart_array.h"
 
-void testInitialization() {
-    SmartArray<int> arr(5);
-    for (size_t i = 0; i < arr.getSize(); ++i) {
-        arr[i] = static_cast<int>(i + 1);
-    }
-
-    if (arr.getSize() != 5) {
-        std::cout << "TestInitialization failed!" << std::endl;
+void testInitialSize() {
+    SmartArray<int> array(3);
+    if (array.getSize() != 3) {
+        std::cout << "TestInitialSize failed!" << std::endl;
     } else {
-        std::cout << "TestInitialization passed!" << std::endl;
+        std::cout << "TestInitialSize passed!" << std::endl;
     }
 }
 
 void testAccessElements() {
-    SmartArray<int> arr(5);
-    for (size_t i = 0; i < arr.getSize(); ++i) {
-        arr[i] = static_cast<int>(i + 1);
-    }
+    SmartArray<int> array(3);
+    array[0] = 1;
+    array[1] = 2;
+    array[2] = 3;
 
-    bool passed = true;
-    for (size_t i = 0; i < arr.getSize(); ++i) {
-        if (arr[i] != static_cast<int>(i + 1)) {
-            std::cout << "TestAccessElements failed!" << std::endl;
-            passed = false;
-        }
-    }
-
-    if (passed) {
+    if (array[0] != 1 || array[1] != 2 || array[2] != 3) {
+        std::cout << "TestAccessElements failed!" << std::endl;
+    } else {
         std::cout << "TestAccessElements passed!" << std::endl;
     }
 }
 
-void testAppendElements() {
-    SmartArray<int> arr(5);
-    for (size_t i = 0; i < arr.getSize(); ++i) {
-        arr[i] = static_cast<int>(i + 1);
-    }
+void testAppendElement() {
+    SmartArray<int> array(3);
+    array[0] = 1;
+    array[1] = 2;
+    array[2] = 3;
+    array.append(4);
 
-    arr.append(6);
-    if (arr.getSize() != 6 || arr[5] != 6) {
-        std::cout << "TestAppendElements failed!" << std::endl;
+    if (array.getSize() != 4 || array[3] != 4) {
+        std::cout << "TestAppendElement failed!" << std::endl;
     } else {
-        std::cout << "TestAppendElements passed!" << std::endl;
+        std::cout << "TestAppendElement passed!" << std::endl;
+    }
+}
+
+void testAppendMultipleElements() {
+    SmartArray<int> array(3);
+    array[0] = 1;
+    array[1] = 2;
+    array[2] = 3;
+
+    for (int i = 4; i <= 6; ++i) {
+        array.append(i);
     }
 
+    if (array.getSize() != 6 || array[3] != 4 || array[4] != 5 || array[5] != 6) {
+        std::cout << "TestAppendMultipleElements failed!" << std::endl;
+    } else {
+        std::cout << "TestAppendMultipleElements passed!" << std::endl;
+    }
 }
 
 void smart_array_with_smart_ptr_test() {
-    testInitialization();
+    testInitialSize();
     testAccessElements();
-    testAppendElements();
+    testAppendElement();
+    testAppendMultipleElements();
+
 }

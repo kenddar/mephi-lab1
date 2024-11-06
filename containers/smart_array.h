@@ -3,8 +3,6 @@
 
 #include "../pointers/smart_ptr.h"
 #include <stdexcept>
-#include <iostream>
-#include <iostream>
 
 template<typename T>
 class SmartArray {
@@ -18,7 +16,10 @@ public:
     }
 
     T& operator[](size_t index) {
-        return data.get()[index];
+        if (index >= size) {
+            throw std::out_of_range("Index out of range");
+        }
+        return data[index];
     }
 
     size_t getSize() const {
@@ -28,19 +29,11 @@ public:
     void append(const T& element) {
         SmartPtr<T> newData(new T[size + 1]);
         for (size_t i = 0; i < size; ++i) {
-            newData.get()[i] = data.get()[i];
+            newData[i] = data[i];
         }
-        newData.get()[size] = element;
+        newData[size] = element;
         size++;
         data = std::move(newData);
-    }
-
-
-    void print() const {
-        for (size_t i = 0; i < size; ++i) {
-            std::cout << data.get()[i] << " ";
-        }
-        std::cout << std::endl;
     }
 };
 
