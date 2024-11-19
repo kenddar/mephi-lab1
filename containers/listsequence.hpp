@@ -3,72 +3,54 @@
 
 #include <iostream>
 #include "linkedlist.hpp"
-#include "../pointers/unique_ptr.h"
 
 template<class T>
-class ListSequence{
+class ListSequence {
 private:
-    UniquePtr<LinkedList<T>> data;
+    LinkedList<T> data;
 
 public:
-    ListSequence(T* items, int count) {
-        this->data = UniquePtr<LinkedList<T>>(new LinkedList<T>(items, count));
-    }
+    ListSequence(T* items, int count) : data(items, count) {}
 
-    ListSequence() {
-        this->data = UniquePtr<LinkedList<T>>(new LinkedList<T>());
-    }
+    ListSequence() : data() {}
 
-
-    ListSequence(ListSequence<T>&& list) noexcept {
-        this->data = std::move(list.data);
-    }
-
-    ListSequence<T>& operator=(ListSequence<T>&& list) noexcept {
-        if (this != &list) {
-            this->data = std::move(list.data);
-        }
-        return *this;
-    }
+    ListSequence(const ListSequence<T>& list) : data(list.data) {}
 
     T GetFirst() {
-        return this->data->GetFirst();
+        return data.GetFirst();
     }
 
     T GetLast() {
-        return this->data->GetLast();
+        return data.GetLast();
     }
 
     T Get(int index) {
-        return this->data->Get(index);
+        return data.Get(index);
     }
 
     ListSequence<T>* GetSubsequence(int startIndex, int endIndex) {
-        UniquePtr<LinkedList<T>> sublist = UniquePtr<LinkedList<T>>(this->data->GetSubList(startIndex, endIndex));
         ListSequence<T>* newSeq = new ListSequence<T>();
-        newSeq->data = std::move(sublist);
+        LinkedList<T>* sublist = data.GetSubList(startIndex, endIndex);
+        newSeq->data = *sublist;
+        delete sublist;
         return newSeq;
     }
 
     int GetLength() {
-        return this->data->GetLength();
+        return data.GetLength();
     }
 
     void Append(T item) {
-        this->data->Append(item);
+        data.Append(item);
     }
 
     void Prepend(T item) {
-        this->data->Prepend(item);
+        data.Prepend(item);
     }
 
     void InsertAt(T item, int index) {
-        this->data->InsertAt(item, index);
+        data.InsertAt(item, index);
     }
-
-
-
-
 };
 
 #endif /* listsequence_hpp */

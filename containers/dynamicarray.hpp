@@ -1,52 +1,56 @@
-
 #ifndef LAB1SEM3_DYNAMICARRAY_HPP
 #define LAB1SEM3_DYNAMICARRAY_HPP
 #include <stdio.h>
 #include <iostream>
+#include "../pointers/shared_ptr.h"
 
 template<class T>
-class DynamicArray{
+class DynamicArray {
 private:
-    T* array= NULL;
+    SharedPtr<T> array;
     int count;
+
 public:
-    DynamicArray(T* items, int size){
-        this->array= new T[size];
-        this->count=size;
-        for(int i=0; i<size; i++){
-            this->array[i]=items[i];
+    DynamicArray(T* items, int size) {
+        T* newArray = new T[size];
+        for(int i = 0; i < size; i++) {
+            newArray[i] = items[i];
         }
-    }
-    DynamicArray(){
-        this->array= NULL;
-        this->count=0;
-    }
-    DynamicArray(int size){
-        this->count=size;
-        this->array=  new T[size];
-    }
-    DynamicArray(const DynamicArray<T>& dynamicArray) {
-        this->count = dynamicArray.count;
-        this->array = new T[this->count];
-
-        for (int i = 0; i < this->count; i++) {
-            this->array[i] = dynamicArray.array[i];
-        }
+        array.reset(newArray);
+        count = size;
     }
 
-    T Get(int index){
+    DynamicArray() : count(0) {
+        array.reset(nullptr);
+    }
+
+    DynamicArray(int size) : count(size) {
+        array.reset(new T[size]);
+    }
+
+    DynamicArray(const DynamicArray<T>& dynamicArray) : count(dynamicArray.count) {
+        T* newArray = new T[count];
+        for (int i = 0; i < count; i++) {
+            newArray[i] = *(dynamicArray.array.get() + i);
+        }
+        array.reset(newArray);
+    }
+
+    T Get(int index) {
         if (index < 0 || index >= count)
             throw std::out_of_range("index");
-        return array[index];
+        return *(array.get() + index);
     }
-    int GetSize(){
-        return this->count;
+
+    int GetSize() {
+        return count;
     }
-    void Set(int index, T value){
-        if(index <0 || index >= count){
+
+    void Set(int index, T value) {
+        if(index < 0 || index >= count) {
             throw std::out_of_range("index");
         }
-        this->array[index]=value;
+        *(array.get() + index) = value;
     }
 
     void Resize(int newSize) {
@@ -55,25 +59,23 @@ public:
         }
 
         if (newSize == 0) {
-            delete[] this->array;
-            this->array = nullptr;
-            this->count = 0;
+            array.reset(nullptr);
+            count = 0;
         } else {
             T* newArray = new T[newSize];
 
-
-            for (int i = 0; i < (newSize < this->count ? newSize : this->count); ++i) {
-                newArray[i] = this->array[i];
+            for (int i = 0; i < (newSize < count ? newSize : count); ++i) {
+                newArray[i] = *(array.get() + i);
             }
 
-            delete[] this->array;
-
-            this->array = newArray;
-            this->count = newSize;
+            array.reset(newArray);
+            count = newSize;
         }
     }
 
-
+    ~DynamicArray() {
+        // SharedPtr will automatically handle memory cleanup
+    }
 };
 
 #endif //LAB1SEM3_DYNAMICARRAY_HPP

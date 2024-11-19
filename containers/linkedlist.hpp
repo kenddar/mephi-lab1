@@ -2,164 +2,159 @@
 #define linkedlist_hpp
 #include <stdio.h>
 #include <iostream>
+#include "../pointers/unique_ptr.h"
+
 template<class T>
-struct Node{
+struct Node {
     T item;
-    Node *next;
+    UniquePtr<Node<T>> next;
+
+    Node(const T& value) : item(value), next(nullptr) {}
 };
 
 template<class T>
-class LinkedList{
+class LinkedList {
 private:
-    Node<T> *first;
-    Node<T> *last;
+    UniquePtr<Node<T>> first;
+    Node<T>* last;
     int size;
+
 public:
-    LinkedList(T* items, int count) {
-        this->first = nullptr;
-        this->last = nullptr;
-        int items_index = 0;
-
+    LinkedList(T* items, int count) : first(nullptr), last(nullptr), size(0) {
         for (int i = 0; i < count; ++i) {
-            Node<T>* newNode = new Node<T>();
-            newNode->item = items[items_index++];
-            newNode->next = nullptr;
-
-            if (this->first == nullptr) {
-                this->first = newNode;
-            } else {
-                this->last->next = newNode;
-            }
-
-            this->last = newNode;
+            Append(items[i]);
         }
+    }
 
-        this->size = count;
-    }
-    LinkedList (){
-        this->first=NULL;
-        this->size=NULL;
-    }
-    LinkedList (LinkedList <T> & list ){
-        for (auto item : list) {
-            Append(item);
+    LinkedList() : first(nullptr), last(nullptr), size(0) {}
+
+    LinkedList(const LinkedList<T>& list) : first(nullptr), last(nullptr), size(0) {
+        Node<T>* current = list.first.get();
+        while (current != nullptr) {
+            Append(current->item);
+            current = current->next.get();
         }
-
-        this->count = list.count;
     }
-    T GetFirst(){
-        T firstElement;
 
-        
-            if(this->first == NULL){
-                throw std::out_of_range("Empty list.");
-            }else{
-                firstElement = this->first->item;
-                return firstElement;
-            }
-        }
-    
-    T GetLast(){
-        T lastElement;
-        if(this->first == NULL){
+    T GetFirst() {
+        if (!first) {
             throw std::out_of_range("Empty list.");
-        }else{
-            lastElement = this->last->item;
-            return lastElement;
         }
+        return first->item;
     }
-    T Get(int index){
-        T item;
-        Node<T>* tmp;
-        int count = 0;
 
-        tmp = this->first;
-    
-            if(index < 0 || index >= this->size){
-                throw std::out_of_range("Incorrect index.");
-            }else{
-                while(count != index){
-                    tmp = tmp->next;
-                    count++;
-                }
-
-                item = tmp->item;
-
-                return item;
-            }
+    T GetLast() {
+        if (!last) {
+            throw std::out_of_range("Empty list.");
+        }
+        return last->item;
     }
+
+    T Get(int index) {
+        if (index < 0 || index >= size) {
+            throw std::out_of_range("Incorrect index.");
+        }
+
+        Node<T>* current = first.get();
+        for (int i = 0; i < index; ++i) {
+            current = current->next.get();
+        }
+        return current->item;
+    }
+
     LinkedList<T>* GetSubList(int startIndex, int endIndex) {
         if (startIndex < 0 || endIndex >= size || startIndex > endIndex) {
             throw std::out_of_range("Invalid index range");
         }
-        LinkedList<T> *subList = new LinkedList<T>();
-        Node<T> *current = first;
+
+        LinkedList<T>* subList = new LinkedList<T>();
+        Node<T>* current = first.get();
         int index = 0;
-        while (current != NULL) {
+
+        while (current != nullptr) {
             if (index >= startIndex && index <= endIndex) {
                 subList->Append(current->item);
             }
-            current = current->next;
+            current = current->next.get();
             index++;
         }
         return subList;
     }
 
-    int GetLength(){
-        return this->size;
+    int GetLength() {
+        return size;
     }
+
     void Append(T item) {
-        Node<T> *newNode = new Node<T>;
-        newNode->item = item;
-        newNode->next = NULL;
+        UniquePtr<Node<T>> newNode(new Node<T>(item));
         if (size == 0) {
-            first = newNode;
+            first = std::move(newNode);
+            last = first.get();
         } else {
-            last->next = newNode;
+            last->next = std::move(newNode);
+            last = last->next.get();
         }
-        last = newNode;
         size++;
     }
 
-
-    void Prepend(T item){
-        auto *node = (Node<T> *)malloc(sizeof(Node<T>));
-        node->item = item;
-        node->next = this->first;
-        this->first = node;
-        this->size++;
-    }
-    void InsertAt(T item, int index){
-        Node<T> *prev=NULL;
-        Node<T> *tmp;
-        int count = 0;
-        if(index < 0 || index >= this->size){
-            throw std::out_of_range("Incorrect index.");
-        }else{
-            tmp = this->first;
-            while(count != index){
-                if(count == index - 1){
-                    prev = tmp;
-                }
-                tmp = tmp->next;
-                count++;
-            }
-            auto *node = (Node<T> *)malloc(sizeof(Node<T>));
-            node->item = item;
-            prev->next = node;
-            node->next = tmp;
-            this->size++;
+    void Prepend(T item) {
+        UniquePtr<Node<T>> newNode(new Node<T>(item));
+        newNode->next = std::move(first);
+        first = std::move(newNode);
+        if (size == 0) {
+            last = first.get();
         }
+        size++;
     }
-    LinkedList<T>* Concat(LinkedList<T> *list){
-        LinkedList<T> *newList = new LinkedList<T>();
-        newList->size = (this->size) + (list->size);
-        newList->first = this->first;
-        this->last->next = list->first;
-        newList->last = list->last;
+
+    void InsertAt(T item, int index) {
+        if (index < 0 || index >= size) {
+            throw std::out_of_range("Incorrect index.");
+        }
+
+        if (index == 0) {
+            Prepend(item);
+            return;
+        }
+
+        Node<T>* current = first.get();
+        for (int i = 0; i < index - 1; ++i) {
+            current = current->next.get();
+        }
+
+        UniquePtr<Node<T>> newNode(new Node<T>(item));
+        newNode->next = std::move(current->next);
+        current->next = std::move(newNode);
+
+        if (index == size - 1) {
+            last = current->next.get();
+        }
+        size++;
+    }
+
+    LinkedList<T>* Concat(LinkedList<T>* list) {
+        LinkedList<T>* newList = new LinkedList<T>();
+
+        // Copy elements from this list
+        Node<T>* current = first.get();
+        while (current != nullptr) {
+            newList->Append(current->item);
+            current = current->next.get();
+        }
+
+        // Copy elements from the parameter list
+        current = list->first.get();
+        while (current != nullptr) {
+            newList->Append(current->item);
+            current = current->next.get();
+        }
+
         return newList;
     }
-    
+
+    ~LinkedList() {
+        // UniquePtr will handle cleanup automatically
+    }
 };
 
 #endif /* linkedlist_hpp */

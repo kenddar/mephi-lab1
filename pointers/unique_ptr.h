@@ -15,9 +15,7 @@ private:
         return temp;
     }
 
-    T* get() const{
-        return ptr;
-    }
+
 
 
 public:
@@ -53,11 +51,13 @@ public:
         return ptr;
     }
 
-
-
     void reset(T* newPtr = nullptr){
         delete ptr;
         ptr = newPtr;
+    }
+
+    T* get() const{
+        return ptr;
     }
 };
 

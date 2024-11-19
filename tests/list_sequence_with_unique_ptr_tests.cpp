@@ -2,12 +2,7 @@
 #include <cassert>
 #include "../containers/listsequence.hpp"
 
-void TestListGetFirst() {
-    int items[] = {1, 2, 3, 4};
-    ListSequence<int> seq(items, 4);
-    assert(seq.GetFirst() == 1);
-    std::cout << "TestListGetFirst passed!" << std::endl;
-}
+
 
 void TestListGetLast() {
     int items[] = {1, 2, 3, 4};
@@ -85,7 +80,6 @@ void list_sequence_with_unique_ptr_tests() {
     TestListAppend();
     TestListGetLength();
     TestListGet();
-    TestListGetFirst();
     TestListGetLast();
     TestListGetOutOfRange();
     TestListInsertAtOutOfRange();

@@ -22,9 +22,7 @@ private:
         }
     }
 
-    T* get() const{
-        return ptr;
-    }
+
 
 public:
     SharedPtr() : ptr(nullptr), ref_count(nullptr){}
@@ -80,6 +78,10 @@ public:
             ptr = nullptr;
             ref_count = nullptr;
         }
+    }
+
+    T* get() const{
+        return ptr;
     }
 };
 #endif //LAB1SEM3_SHARED_PTR_H
